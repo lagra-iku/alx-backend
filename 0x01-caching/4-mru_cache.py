@@ -39,9 +39,10 @@ class MRUCache(BaseCaching):
         """
         return the value in self.cache_data linked to key.
         """
-        if key is None or key not in self.cache_data.keys():
-            return None
-        else:
-            item = self.cache_data.pop(key)
-            self.cache_data[key] = item
-            return item
+        if key is not None:
+            if key in self.cache_data:
+                # Update access order
+                self.access_order.remove(key)
+                self.access_order.append(key)
+                return self.cache_data[key]
+        return None
