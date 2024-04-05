@@ -1,4 +1,4 @@
-#0x01. Caching
+# 0x01. Caching
 
 ## OBJECTIVES
 - What a caching system is
