@@ -1,11 +1,11 @@
-#0x00. Pagination
+# 0x00. Pagination
 
-##OBJECTIVES
+## OBJECTIVES
 - How to paginate a dataset with simple page and page_size parameters
 - How to paginate a dataset with hypermedia metadata
 - How to paginate in a deletion-resilient manner
 
-##MANDATORY TASKS
+## MANDATORY TASKS
 - 0-simple_helper_function.py
 - 1-simple_pagination.py
 - 2-hypermedia_pagination.py
