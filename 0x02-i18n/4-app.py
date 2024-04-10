@@ -3,7 +3,7 @@
 Get locale from request
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
 class Config:
@@ -11,7 +11,7 @@ class Config:
     Config class
     """
     LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_LOCALE = 'fr'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
@@ -34,7 +34,7 @@ def get_locale():
 @app.route('/')
 def index():
     """index function"""
-    return render_template('4-index.html')
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
