@@ -3,7 +3,15 @@
 Get locale from request
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, g
+
+
+users = {
+    1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
+    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+    3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
+    4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
+}
 
 
 class Config:
@@ -20,6 +28,20 @@ app.url_map.strict_slashes = False
 app.config.from_object(Config)
 babel = Babel(app)
 
+def get_user():
+    """Mock logging in"""
+    ID = request.args.get('login_as')
+    try:
+        return users.get(int(ID))
+    except Exception:
+        return None
+
+
+@app.before_request
+def before_request():
+    """be executed before all other functions"""
+    g.user = get_user()
+
 
 @babel.localeselector
 def get_locale():
@@ -34,7 +56,7 @@ def get_locale():
 @app.route('/')
 def index():
     """index function"""
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
