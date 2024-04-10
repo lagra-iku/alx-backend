@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Basic Babel setup
+Get locale from request
 """
 from flask import Flask, render_template, g, request
 from flask_babel import Babel
@@ -20,12 +20,14 @@ app.url_map.strict_slashes = False
 app.config.from_object(Config)
 babel = Babel(app)
 
+
 @babel.localeselector
 def get_locale():
     """
     if a user is logged in, use the locale from the user settings
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 @app.route('/')
 def index():
