@@ -18,16 +18,14 @@ class Config:
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.config.from_object(Config)
+babel = Babel(app)
 
-
+@babel
 def get_locale():
     """
     if a user is logged in, use the locale from the user settings
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-babel = Babel(app, locale_selector=get_locale)
 
 
 @app.route('/')
