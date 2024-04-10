@@ -64,32 +64,10 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@babel.timezoneselector
-def get_timezone():
-    """
-    Infer appropriate timezone
-    """
-    timez = request.args.get('timezone', None)
-    if timez:
-        try:
-            return timezone(timez).zone
-        except pytz.exceptions.UnknownTimeZoneError:
-            pass
-
-    if g.user:
-        try:
-            timez = g.user.get('timezone')
-            return timezone(timez).zone
-        except pytz.exceptions.UnknownTimeZoneError:
-            pass
-
-    return app.config['BABEL_DEFAULT_TIMEZONE']
-
-
 @app.route('/')
 def index():
     """index function"""
-    return render_template('5-index.html')
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
