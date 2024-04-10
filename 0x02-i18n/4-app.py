@@ -31,16 +31,10 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-app = Flask(__name__)
-app.config.from_object(Config)
-babel = Babel(app)
-babel.init_app(app, locale_selector=get_locale)
-
-
 @app.route('/')
 def index():
     """index function"""
-    return render_template('2-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == '__main__':
