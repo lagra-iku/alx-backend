@@ -20,7 +20,8 @@ app.url_map.strict_slashes = False
 app.config.from_object(Config)
 babel = Babel(app)
 
-@babel
+
+@babel.localeselector
 def get_locale():
     """
     if a user is logged in, use the locale from the user settings
