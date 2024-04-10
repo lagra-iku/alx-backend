@@ -31,21 +31,6 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_user():
-    """Mock logging in"""
-    ID = request.args.get('login_as')
-    try:
-        return users.get(int(ID))
-    except Exception:
-        return None
-
-
-@app.before_request
-def before_request():
-    """be executed before all other functions"""
-    g.user = get_user()
-
-
 @babel.localeselector
 def get_locale():
     """Force locale with URL parameter"""
@@ -62,6 +47,21 @@ def get_locale():
     if locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+def get_user():
+    """Mock logging in"""
+    ID = request.args.get('login_as')
+    try:
+        return users.get(int(ID))
+    except Exception:
+        return None
+
+
+@app.before_request
+def before_request():
+    """be executed before all other functions"""
+    g.user = get_user()
 
 
 @app.route('/')
