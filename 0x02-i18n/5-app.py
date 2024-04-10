@@ -3,6 +3,7 @@
 Get locale from request
 """
 from flask import Flask, render_template, request
+from typing import Union, Dict
 from flask_babel import Babel, g
 
 
@@ -30,22 +31,20 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Force locale with URL parameter"""
-    lang = request.args.get('locale')
-    if lang is not None:
-        if lang in app.config['LANGUAGES']:
-            return lang
+    lang = request.args.get('locale', '')
+    if lang in app.config['LANGUAGES']:
+        return lang
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user():
+def get_user() -> Union[Dict, None]:
     """Mock logging in"""
     ID = request.args.get('login_as')
-    try:
+    if ID:
         return users.get(int(ID))
-    except Exception:
-        return None
+    return None
 
 
 @app.before_request
